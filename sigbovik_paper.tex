@@ -1,0 +1,605 @@
+% SIGBOVIK 2026 Submission
+% Association for Computational Heresy
+
+\documentclass[sigconf]{acmart}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage{soul}
+\usepackage{microtype}
+\usepackage{lipsum}
+
+% For the SIGBOVIK feel
+\definecolor{reviewerred}{rgb}{0.8,0.0,0.0}
+\newcommand{\reviewer}[1]{\textcolor{reviewerred}{\textbf{[Reviewer \#2: #1]}}}
+
+\title{Negative Vibes Only: Suppressing Unwanted Semantics in Diffusion Models via\\
+Aggressive Geometric Algebra and Wishful Thinking}
+
+\subtitle{Also: We Multiplied by 2.0 and It Worked (A Proof)}
+
+\author{Blorptimus Wrengle III}
+\affiliation{%
+  \institution{Department of Latent Space Janitorial Services}
+  \institution{University of Somewhere Cold}
+  \city{Somewhere Cold}
+  \country{Canada (probably)}
+}
+\email{b.wrengle@definitely-real-university.edu}
+
+\author{Dr. Perpendicular T. Manifold}
+\affiliation{%
+  \institution{Institute for Advanced Vibes}
+  \city{The Cloud}
+  \country{AWS us-east-1}
+}
+\email{perp@vibes.institute}
+
+\author{Anonymous Reviewer \#2}
+\affiliation{%
+  \institution{Reviewer \#2's Mom's Basement}
+  \city{[REDACTED]}
+  \country{[REDACTED]}
+}
+\email{my-paper-was-rejected@icml.cc}
+
+\begin{abstract}
+We present \textit{Normalized Attention Guidance} (NAG), a method for telling
+diffusion models what we \emph{don't} want in images, as opposed to the
+traditional approach of telling them what we \emph{do} want and just accepting
+the disaster that follows. Our key insight is that negative prompts, when applied
+in the traditional latent space, are essentially shouting into the void during
+the early denoising steps, at which point the model is still a Jackson Pollock
+painting and cannot yet be offended by your request to suppress ``ugly, blurry,
+watermark.'' Instead, we apply guidance in \emph{attention space}, rotating
+feature vectors away from the undesired semantic direction using spherical linear
+interpolation (slerp), a technique we borrowed from quaternion animation code
+from a 2004 game engine forum post.
+
+Furthermore, we present \textit{BitDance}, a 14-billion parameter model that
+generates images 64 tokens at a time in parallel, which we call ``parallel
+prediction'' and definitely not ``we ran out of sequential ideas.'' BitDance
+uses a text encoder, a projector, a diffusion head, and an autoencoder---which
+is either a pipeline or a Rube Goldberg machine depending on whether it works.
+
+We evaluate our methods using FID (which everyone knows is bad but everyone
+still uses), a metric we call VIBE (Visually Impressive But Evaluating-nothing),
+and a user study conducted on the authors' significant others. Results are
+extremely promising assuming you read the right rows of Table 1.
+
+\reviewer{This abstract is too long. Also too short. Reject.}
+\end{abstract}
+
+\begin{CCSXML}
+<ccs2012>
+  <concept>
+    <concept_id>10010147.10010257.10010258</concept_id>
+    <concept_desc>Computing methodologies~Vibe-based learning</concept_desc>
+    <concept_significance>500</concept_significance>
+  </concept>
+</ccs2012>
+\end{CCSXML}
+
+\ccsdesc[500]{Computing methodologies~Vibe-based learning}
+
+\keywords{diffusion models, negative prompts, geometric wishful thinking,
+spherical linear interpolation, the number 2.0, latent vibes, attention is all
+you need (but guided attention is all you \emph{really} need)}
+
+\maketitle
+
+%-----------------------------------------------------------------------
+\section{Introduction}
+
+Text-to-image diffusion models have achieved remarkable quality, enabling users
+to generate photorealistic images from natural language descriptions such as
+``astronaut riding a horse'' and ``corporate headshot but make it look like I
+slept'' \cite{rombach2022ldm,saharia2022imagen,notcited2023something}. A natural
+extension is to also specify what one does \emph{not} want: negative prompts
+like ``ugly, blurry, deformed, extra fingers'' allow users to describe their
+artistic vision as a list of phobias.
+
+Classifier-Free Guidance (CFG) \cite{ho2022cfg} is the standard approach:
+\begin{equation}
+  \hat{\epsilon} = \epsilon_\theta(x_t, \varnothing) +
+    w \bigl(\epsilon_\theta(x_t, c) - \epsilon_\theta(x_t, \varnothing)\bigr)
+\end{equation}
+which the reader will note involves the empty string $\varnothing$, an
+unconditional prediction that is essentially the model's best guess at art
+after receiving a prompt equivalent to a blank stare.
+
+\textbf{The problem.} CFG breaks catastrophically in few-step distilled models
+like Flux-Schnell, where the model completes the entire creative process in 4
+steps (approximately one step per stage of grief). During these steps, especially
+the early ones, the conditional and unconditional branches are pointing in
+wildly different directions in feature space---imagine asking two blindfolded
+strangers to point at a dog. Extrapolating between two random directions does
+not produce ``no dogs.'' It produces soup.
+
+\textbf{Our solution.} We observe that attention features are more meaningful
+than latent codes early in the denoising process (we observed this by staring
+at activation visualizations until they looked like something). We therefore
+apply guidance in \emph{attention space} using angular interpolation, ensuring
+that our guidance is geometrically meaningful rather than just vibes. The result
+is Normalized Attention Guidance (NAG).
+
+\textbf{Also we multiplied by 2.0.} This is correct. We prove this in
+Section~\ref{sec:proof_of_two}.
+
+\reviewer{I don't see how this is better than just using more steps. Have you
+tried using more steps? I recommend using more steps. Weak reject.}
+
+Our contributions are:
+\begin{enumerate}
+  \item NAG: guidance in attention space using angular interpolation and
+    L1-norm constraints, which reduces artifacts without reducing our
+    confidence.
+  \item BitDance: a 14B parameter model with a name that will confuse people
+    searching for cryptocurrency and TikTok simultaneously.
+  \item A formal proof that multiplying by 2.0 at the attention level is
+    correct (Section~\ref{sec:proof_of_two}).
+  \item Table 1, which contains numbers.
+\end{enumerate}
+
+%-----------------------------------------------------------------------
+\section{Related Work}
+
+\textbf{Diffusion Models.} There are many papers on diffusion models. We cite
+some of them. Others we do not cite, and those authors should probably just
+move on.
+
+\textbf{Guidance.} Classifier guidance \cite{dhariwal2021diffusion} trains a
+separate classifier to point the denoising process toward desired classes.
+Classifier-free guidance \cite{ho2022cfg} eliminates the separate classifier
+by training the model to be its own critic, which sounds healthy but isn't.
+Perp-Neg \cite{armandpour2023perpneg} applies guidance in the direction
+perpendicular to the text embedding, which sounds very sophisticated and
+possibly is.
+
+\textbf{Negative Prompts.} Users have discovered that writing ``ugly blurry
+deformed'' as a negative prompt generally improves quality, suggesting that
+the model has a latent dimension of ``the ugly blurry deformed vibe,'' which
+it will add to your image unless explicitly asked not to. This is consistent
+with training on the internet.
+
+\textbf{Spherical Linear Interpolation.} Slerp was invented by Ken Shoemake in
+1985 \cite{shoemake1985animating} for smooth quaternion animation and has since
+been repurposed by every machine learning paper that noticed two vectors and
+wanted to interpolate between them. We are no exception.
+
+\textbf{BitDance.} BitDance is related to work on autoregressive image
+generation \cite{van2016pixel,esser2021taming}, flow matching
+\cite{lipman2022flow}, and that one paper where someone generated images one
+row at a time which seemed bad but apparently wasn't. The key difference is
+that BitDance does 64 tokens in parallel, which we will now call a
+``contribution'' rather than an ``engineering decision.''
+
+\reviewer{You failed to cite [AUTHORNAME 2023], which is my paper. This is
+inexcusable. Major revision required.}
+
+%-----------------------------------------------------------------------
+\section{Background: Diffusion Models and Why They're Like That}
+
+A diffusion model learns to reverse a noising process. Given a clean image
+$x_0$, we add noise:
+\begin{equation}
+  x_t = \sqrt{\bar\alpha_t}\, x_0 + \sqrt{1-\bar\alpha_t}\, \epsilon,
+  \quad \epsilon \sim \mathcal{N}(0, I)
+\end{equation}
+The model then learns to predict $\epsilon$ (the noise) or $x_0$ (the image)
+or $v$ (the velocity), depending on which parameterization the authors
+preferred. All three are equivalent, which means three times as many papers
+can be written.
+
+\textbf{Flow Matching.} Flow matching \cite{lipman2022flow} is like diffusion
+but the noise schedule is straighter, the math is cleaner, and the authors
+are more relaxed at conferences. BitDance uses flow matching with velocity
+prediction:
+\begin{equation}
+  v_\theta(x_t, t) \approx x_1 - x_0
+\end{equation}
+where $x_0$ is noise and $x_1$ is the image, or vice versa, we can never
+remember.
+
+\textbf{Transformers.} The transformer architecture \cite{vaswani2017attention}
+computes attention weights via:
+\begin{equation}
+  \text{Attn}(Q, K, V) = \text{softmax}\!\left(\frac{QK^\top}{\sqrt{d}}\right) V
+\end{equation}
+where $d$ is a number. The output of this attention, before the output
+projection $W_o$, is what we call the ``attention hidden state'' $h$,
+which is where NAG operates, which is the key thing you need to know.
+
+%-----------------------------------------------------------------------
+\section{Normalized Attention Guidance (NAG)}
+
+\subsection{Motivation: The Soup Problem}
+
+As established in Section 1, naive CFG in few-step models produces soup.
+Formally, let $h_+$ and $h_-$ be the attention hidden states for positive and
+negative prompts respectively. Standard CFG computes:
+\begin{equation}
+  h_\text{cfg} = h_- + s(h_+ - h_-)
+\end{equation}
+When $h_+$ and $h_-$ are pointing in random directions (early denoising), this
+extrapolation exits the data manifold entirely. The model then decodes this
+out-of-manifold vector as soup.
+
+\subsection{Angular Guidance: Rotation Instead of Extrapolation}
+
+Our key insight: instead of extrapolating past $h_+$ in the direction away from
+$h_-$, we should \emph{rotate} $h_+$ away from $h_-$. This respects the
+manifold structure (citation needed) and produces less soup.
+
+Given $h_+$ and $h_-$, we compute the angular guidance as:
+\begin{align}
+  \hat{h}_+ &= h_+ / \|h_+\|_2 \\
+  \hat{h}_- &= h_- / \|h_-\|_2 \\
+  \theta &= \arccos(\hat{h}_+ \cdot \hat{h}_-) \\
+  h_\text{ang} &= \frac{\sin(\theta_1)}{\sin(\theta)}\hat{h}_+
+                  + \frac{\sin(\theta - \theta_1)}{\sin(\theta)}\hat{h}_-
+\end{align}
+where $\theta_1$ is chosen to rotate $h_+$ away from $h_-$ by angle
+proportional to the guidance scale. The result is then scaled back to the
+magnitude of $h_+$:
+\begin{equation}
+  h_\text{final} = h_\text{ang} \cdot \|h_+\|_2 \cdot 2.0
+\end{equation}
+
+The $\times 2.0$ factor is the subject of Section~\ref{sec:proof_of_two}.
+
+\subsection{L1-Norm Guidance: For the Less Geometrically Adventurous}
+
+For those who find spherical geometry unnecessarily exciting, we also provide
+an L1-normalized variant:
+\begin{align}
+  h_\text{cfg} &= h_+ \cdot s - h_- \cdot (s-1) \\
+  \text{scale} &= \min\!\left(\frac{\|h_+\|_1}{\|h_\text{cfg}\|_1},\ \tau\right) \\
+  h_\text{norm} &= h_\text{cfg} \cdot \text{scale}
+\end{align}
+where $\tau$ (``tau'') is a hyperparameter the user will need to tune
+experimentally, generating approximately 40-60 additional GPU-hours of compute
+bills before finding a value that looks good. The final output blends the
+normalized guidance with the positive features:
+\begin{equation}
+  h_\text{out} = \alpha \cdot h_\text{norm} + (1-\alpha) \cdot h_+
+\end{equation}
+where $\alpha$ is another hyperparameter.
+
+\subsection{The Proof That Multiplying by 2.0 Is Correct}
+\label{sec:proof_of_two}
+
+\begin{theorem}[The Factor of Two]
+The $\times 2.0$ factor in the angular guidance formula is correct.
+\end{theorem}
+
+\begin{proof}
+Consider the residual stream of a transformer block. The attention output
+$h_\text{attn}$ is added to the residual stream $x$:
+\begin{equation}
+  x' = x + W_o h_\text{attn}
+\end{equation}
+NAG modifies $h_\text{attn}$ by a factor of $f$. The effect on the residual
+stream is thus scaled by $f$. If $f = 1.25$ (from $\alpha = 0.25$ blending),
+and the model has $L = 57$ blocks (Flux has 57 blocks; we counted), then
+naive application would result in:
+\begin{equation}
+  \text{total amplification} = 1.25^{57} \approx 83{,}000
+\end{equation}
+which is a lot. However, NAG operates \emph{within} the attention computation,
+on $h$ before $W_o$, at the attention level rather than the block level.
+The residual connection absorbs most of this growth, reducing the effective
+amplification to approximately $1.25^1 = 1.25$ per block, which compounds to
+$1.25^{57} \approx 83{,}000$\ldots
+
+We pause to reconsider.
+
+Actually the $\times 2.0$ is needed to counteract the $\times 0.5$ implicit in
+the attention scale, because the angular guidance reconstructs the vector at
+the wrong scale for reasons that are clear from the code if you read it very
+carefully and then read it again. Specifically, the slerp output has magnitude
+$\|h_+\| / 2$ due to the angular averaging step, and multiplying by $2.0$
+restores this. We verified this empirically by running the code with $\times 1.0$
+and observing that the images were worse, and then running it with $\times 2.0$
+and observing that they were better.
+
+$\square$
+\end{proof}
+
+\reviewer{This is not a proof. Weak reject.}
+
+\noindent\textit{Response to Reviewer \#2:} We dispute this characterization.
+The square is right there.
+
+%-----------------------------------------------------------------------
+\section{BitDance: Dancing with Bits}
+
+BitDance is a 14-billion parameter autoregressive diffusion model designed to
+generate images of resolution up to 2048$\times$512, a resolution that is
+optimized for people who want very wide images of very short things.
+
+\subsection{Architecture}
+
+The architecture is illustrated in Figure~\ref{fig:arch}, which we did not
+actually include in this paper but which you should imagine as a series of
+boxes connected by arrows.
+
+\begin{description}
+  \item[Text Encoder.] A fine-tuned Qwen3 language model processes the text
+    prompt and produces a 5120-dimensional embedding. We use a language model
+    as our text encoder because CLIP embeddings felt limiting and we had a Qwen3
+    lying around.
+  \item[Projector.] A two-layer MLP with GELU activation. This is the part of
+    the paper where you normally write ``simple yet effective,'' so: simple yet
+    effective.
+  \item[Diffusion Head.] A transformer that accepts the projected text features
+    and outputs velocity predictions for 64 tokens in parallel. Why 64? Because
+    $64 = 8 \times 8$ and $8 \times 8$ is a grid and grids are satisfying.
+  \item[Autoencoder.] A convolutional VAE that decodes latent codes into images.
+    Uses channel multipliers $(1, 2, 2, 4)$, a sequence so natural that
+    stopping at $4$ instead of continuing to $8$ requires genuine restraint.
+\end{description}
+
+\subsection{Parallel Prediction: Doing 64 Things at Once}
+
+Standard autoregressive models predict tokens one at a time, autoregressively,
+hence the name. This is slow. BitDance predicts 64 tokens simultaneously, which
+is fast. We call this ``parallel prediction,'' which is distinct from
+``batch processing'' in that it is our idea.
+
+The 64-parallel prediction means BitDance generates a 1024$\times$1024 image
+in approximately 15.79 seconds on an A100 GPU, which costs \$2--4 per hour to
+rent, meaning each image costs approximately \$0.017. This is approximately
+the same as the cost of one ``like'' on social media, a comparison we include
+to make the research feel grounded.
+
+\subsection{Special Tokens for Resolution Specification}
+
+BitDance uses special tokens \texttt{<|res\_H|>} and \texttt{<|res\_W|>} to
+specify image dimensions. This design decision allows the model to be resolution-
+aware, and also means that if you accidentally swap H and W you get a very
+wide or very tall image instead of an error, which we have decided to call
+a feature.
+
+\subsection{Memory Requirements}
+
+BitDance requires 39--42 GB of GPU memory regardless of resolution, which we
+attribute to ``consistent memory allocation patterns'' and definitely not to
+the model loading everything into memory immediately and then sitting there.
+
+%-----------------------------------------------------------------------
+\section{Experiments}
+
+\subsection{Experimental Setup}
+
+We evaluated our methods on a diverse set of prompts including:
+\begin{itemize}
+  \item ``A tattered umbrella melts through metallic slats''
+  \item ``In a surreal, blurry dreamscape, a massively oversaturated crimson apple''
+  \item ``A cyberpunk cityscape at night''
+  \item ``Please just make a normal photo'' (negative prompt: ``weird, surreal, dreamscape, oversaturated'')
+\end{itemize}
+
+Hardware: one (1) NVIDIA A100 (borrowed). Software: PyTorch, Diffusers, and
+approximately 4,000 lines of attention processor code we wrote by hand.
+
+\subsection{Quantitative Results}
+
+\begin{table}[h]
+\caption{Comparison of guidance methods. Higher VIBE is better.
+Lower FID is better. The $\dagger$ symbol indicates results that are
+statistically significant if you don't look too closely at the error bars.}
+\label{tab:main}
+\begin{tabular}{lccc}
+\toprule
+Method & FID $\downarrow$ & VIBE $\uparrow$ & Steps \\
+\midrule
+No guidance & 48.3 & 2.1 & 4 \\
+CFG (soup) & 124.7 & 0.4 & 4 \\
+NAG (norm\_cfg) & 31.2$^\dagger$ & 8.7$^\dagger$ & 4 \\
+NAG (angular) & 29.8$^\dagger$ & 9.2$^\dagger$ & 4 \\
+NAG $\times 1.0$ (ablation) & 38.1 & 5.3 & 4 \\
+NAG $\times 2.0$ (ours) & 29.8$^\dagger$ & 9.2$^\dagger$ & 4 \\
+NAG $\times 3.0$ (curiosity) & 187.4 & 0.1 & 4 & \\
+Using more steps (Reviewer \#2) & 32.1 & 7.8 & 28 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+We observe that NAG outperforms CFG substantially, consistent with our
+hypothesis that ``soup'' is bad. The ablation confirms that $\times 2.0$
+is correct (see Section~\ref{sec:proof_of_two}). Reviewer \#2's suggestion
+(28 steps) does achieve competitive performance but at a 7$\times$ cost
+increase, which Reviewer \#2 does not pay.
+
+\subsection{VIBE Metric}
+
+VIBE (Visually Impressive But Evaluating-nothing) is our proposed alternative
+to FID. VIBE is computed as follows: the first author looks at the image and
+assigns a score from 1 to 10 based on whether they would share it in a group
+chat. We believe VIBE captures aspects of image quality that FID misses,
+specifically the aspect of ``does it look cool.''
+
+\reviewer{VIBE is not a real metric. Major revision.}
+
+\textit{Response:} FID is also not a real metric by this standard.
+We will add a citation to justify VIBE's use.
+
+\subsection{User Study}
+
+We conducted a user study with $n = 3$ participants (the authors). Participants
+were shown pairs of images (with and without NAG) and asked to indicate which
+they preferred. Results: 100\% preferred NAG images. When the non-first-author
+co-author expressed ambivalence about one image pair, their response was recorded
+as ``mild preference for NAG'' and the study was concluded.
+
+%-----------------------------------------------------------------------
+\section{Discussion}
+
+\subsection{Limitations}
+
+\begin{enumerate}
+  \item NAG requires tuning three hyperparameters ($s$, $\tau$, $\alpha$).
+    In practice, users will set $\tau = 10$, run the model, think it looks okay,
+    and move on. This is fine.
+  \item BitDance requires 40 GB of GPU memory, which is the kind of limitation
+    that sounds like a limitation but is secretly a ``you should buy an A100''
+    advertisement.
+  \item The VIBE metric has not been validated against human preferences in any
+    systematic way, where ``systematic'' is defined as ``more than 3 people.''
+  \item We are not entirely certain the $\times 2.0$ proof is a proof.
+\end{enumerate}
+
+\subsection{Broader Impact}
+
+NAG enables more precise negative prompting in text-to-image models. This
+technology could be misused to generate images without certain attributes,
+such as images without ``watermark'' (legitimate) or images without ``safety
+features'' (less legitimate). We therefore recommend that all users behave
+themselves, and we acknowledge that this recommendation is insufficient.
+
+BitDance's 64-parallel prediction mechanism could inspire future work in
+parallel generation. We claim partial credit for this inspiration.
+
+%-----------------------------------------------------------------------
+\section{Conclusion}
+
+We presented NAG and BitDance. NAG operates in attention space, uses angular
+interpolation, multiplies by 2.0 (correctly), and produces images without the
+features you asked it to avoid. BitDance generates images in parallel batches
+of 64 tokens, uses a Qwen3 language model to understand prompts, and costs
+approximately \$0.017 per image. Both methods work, as evidenced by Table 1.
+
+Future work includes: (1) explaining why the $\times 2.0$ works in a more
+convincing way, (2) reducing BitDance's memory requirements to a quantity that
+does not require renting a server, and (3) developing a rigorous theoretical
+foundation for the VIBE metric, ideally one that results in a 9.2.
+
+We hope this paper has been informative, or at least entertaining, or at the
+very least had enough math in it to look like it might be a real paper at a
+glance.
+
+\reviewer{I reviewed a much better paper on a similar topic last year. It was
+my own paper. Reject.}
+
+%-----------------------------------------------------------------------
+\begin{acks}
+The authors thank the SIGBOVIK Program Committee for accepting papers of this
+caliber. We also thank Reviewer \#2 for their thorough engagement with the work,
+though we note that suggesting ``use more steps'' in response to a paper about
+4-step guidance is like suggesting ``use a bigger boat'' in response to a paper
+about sailing.
+
+This work was supported in part by GPU hours donated by an institution that
+would prefer not to be named in this paper, an A100 that the first author
+borrowed ``temporarily'' eight months ago, and several pots of coffee.
+
+No significant others were harmed in the user study, though one expressed
+surprise at being asked to rate AI-generated images ``for science.''
+\end{acks}
+
+%-----------------------------------------------------------------------
+\bibliographystyle{ACM-Reference-Format}
+\begin{thebibliography}{99}
+
+\bibitem{rombach2022ldm}
+R.~Rombach, A.~Blattmann, D.~Lorenz, P.~Esser, and B.~Ommer.
+\newblock High-resolution image synthesis with latent diffusion models.
+\newblock In \textit{CVPR}, 2022.
+
+\bibitem{saharia2022imagen}
+C.~Saharia et al.
+\newblock Photorealistic text-to-image diffusion models with deep language
+  understanding.
+\newblock In \textit{NeurIPS}, 2022.
+
+\bibitem{notcited2023something}
+A.~Somebody.
+\newblock A paper we didn't cite but should have.
+\newblock \textit{Journal of Things We Forgot}, 2023.
+
+\bibitem{ho2022cfg}
+J.~Ho and T.~Salimans.
+\newblock Classifier-free diffusion guidance.
+\newblock In \textit{NeurIPS Workshops}, 2021.
+\newblock (We cited the workshop paper instead of the arXiv version to save
+  space in the reference list, not for any other reason.)
+
+\bibitem{dhariwal2021diffusion}
+P.~Dhariwal and A.~Nichol.
+\newblock Diffusion models beat GANs on image synthesis.
+\newblock In \textit{NeurIPS}, 2021.
+
+\bibitem{armandpour2023perpneg}
+M.~Armandpour et al.
+\newblock Re-imagine the negative prompt algorithm: Transform the negative
+  space via geometric principles to enhance coherence and quality.
+\newblock \textit{arXiv:2304.05938}, 2023.
+
+\bibitem{shoemake1985animating}
+K.~Shoemake.
+\newblock Animating rotation with quaternion curves.
+\newblock In \textit{SIGGRAPH}, 1985.
+\newblock (The only citation in this paper from the 20th century.)
+
+\bibitem{van2016pixel}
+A.~van den Oord et al.
+\newblock Pixel recurrent neural networks.
+\newblock In \textit{ICML}, 2016.
+
+\bibitem{esser2021taming}
+P.~Esser, R.~Rombach, and B.~Ommer.
+\newblock Taming transformers for high-resolution image synthesis.
+\newblock In \textit{CVPR}, 2021.
+
+\bibitem{lipman2022flow}
+Y.~Lipman, R.~T.~Q.~Chen, H.~Ben-Hamu, M.~Nickel, and M.~Le.
+\newblock Flow matching for generative modeling.
+\newblock In \textit{ICLR}, 2023.
+\newblock (Published at ICLR 2023 but titled with 2022 because it was on arXiv
+  in 2022. This is normal and not confusing.)
+
+\bibitem{vaswani2017attention}
+A.~Vaswani et al.
+\newblock Attention is all you need.
+\newblock In \textit{NeurIPS}, 2017.
+\newblock (Every deep learning paper is legally required to cite this.)
+
+\end{thebibliography}
+
+\appendix
+\section{Hyperparameter Recommendations}
+
+For users who want NAG to work without reading the paper:
+
+\begin{table}[h]
+\caption{Recommended hyperparameters. These were tuned on the authors' preferred
+prompts and may or may not generalize.}
+\begin{tabular}{lccc}
+\toprule
+Model & \texttt{nag\_scale} & \texttt{nag\_tau} & \texttt{nag\_alpha} \\
+\midrule
+Flux-Schnell & 5.0 & 10 & 0.25 \\
+Flux-Dev & 5.0 & 2.5 & 0.125 \\
+SD3 & 5.0 & 10 & 0.25 \\
+SDXL & 5.0 & 10 & 0.25 \\
+Wan2.1 (video) & 5.0 & 10 & 0.25 \\
+Reviewer \#2's model & N/A & N/A & N/A \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{A Note on the VIBE Metric}
+
+Future work will formalize VIBE as:
+\begin{equation}
+  \text{VIBE}(x) = \frac{1}{N}\sum_{i=1}^{N} \text{GroupChatShareability}(x, u_i)
+\end{equation}
+where $u_i$ are human evaluators and \text{GroupChatShareability} is measured
+on a Likert scale. We anticipate $N \geq 5$ in the camera-ready version.
+
+\reviewer{Appendix B is not rigorous. Reject.}
+
+\end{document}
