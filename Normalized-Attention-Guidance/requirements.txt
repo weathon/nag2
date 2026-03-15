@@ -1,0 +1,5 @@
+accelerate
+diffusers
+torch
+transformers
+sentencepiece
