@@ -1,0 +1,148 @@
+{
+    "anti_aesthetics": {
+        "realism_and_style": {
+            "uncanny_valley": "Humanoid figures that look nearly human but possess unsettling, non-human imperfections that trigger subtle fear or revulsion.",
+            "plastic_toy_look": "Surfaces look like cheap plastic toys with uniform sheen and simplified detail, producing a synthetic and emotionally flat impression.",
+            "weirdcore_fragmented_identity": "Disjoint, collage-like imagery with distorted symbolism, misplaced faces, and fragmented identity cues that feel uncanny and alien.",
+            "liminal_space_aesthetic": "Empty transitional spaces with ambiguous function, endless repetition, and a suspended, in-between atmosphere that suggests drifting or waiting.",
+            "analog_horror_found_footage": "Low-fidelity analog-style visuals that feel archival, degraded, and observational with implied off-screen threat and slow-building dread.",
+            "Psychedelic art": "Vivid, surreal imagery with intense colors, distorted forms, and dreamlike symbolism that evokes altered states of consciousness and emotional intensity.",
+            "outsider_naive_style": "Crude, naive rendering that ignores conventional proportion, perspective, and polish in favor of raw, awkward expression and unfiltered imagery."
+        },
+        "color_quality": {
+            "wrong_object_color": "Objects depicted with colors that do not correspond to their real-world counterparts, creating a sense of strangeness or symbolic dislocation.",
+            "uneven_white_balance": "Inconsistent color temperature across the scene, causing mixed or shifting tints that break visual coherence.",
+            "clashing_disharmony": "Color palettes that conflict and create visual discomfort through aggressive, unbalanced relationships.",
+            "muted_color": "Dull or desaturated tones lacking vibrancy and energy, contributing to a flat or exhausted mood.",
+            "color_bleeding": "Colors spilling over the edges of defined objects into adjacent areas, degrading separation and clarity.",
+            "chromatic_aberration": "Color fringing along high-contrast edges caused by lens or rendering failure, suggesting cheap optics or digital error.",
+            "color_banding": "Visible steps between color shades instead of a smooth gradient, revealing limited tonal precision.",
+            "sodium_vapor_cast": "Strong yellow-orange color cast reminiscent of sodium vapor street lighting that overwhelms neutral tones.",
+            "retro_faded_palette": "Washed-out, aged colors with low saturation, uneven fading, and a nostalgic, timeworn cast that implies archival or decayed media.",
+            "toxic_neon_palette": "Hyper-bright, acidic colors with aggressive contrast that feel synthetic, unstable, and overstimulating to the eye.",
+            "sickly_color_cast": "Unhealthy overall tint that suggests rot, illness, or contamination and shifts skin and surfaces toward unsettling hues.",
+            "monotone_tint_overcast": "Dominant single-color or narrow-band tint that flattens variety and imposes a heavy, somber mood across the frame."
+        },
+        "clarity_and_focus": {
+            "blurriness": "General lack of sharpness or distinct edges in the image that obscures detail and form.",
+            "out_of_focus": "Main subjects are not sharp due to improper focal depth, drawing attention away from intended points of interest.",
+            "motion_blur": "Streaking or smearing caused by movement during exposure, weakening structural clarity.",
+            "noise": "Grainy textures or electronic interference affecting image purity and reducing smooth tonal transitions.",
+            "compression_artifacts": "Blocky distortion or 'mosquito noise' resulting from high image compression, especially around edges and gradients.",
+            "compression_mosquito_noise": "Swarming edge noise around details due to heavy compression that breaks clean boundaries.",
+            "double_exposure": "Overlapping exposures that create duplicated or ghosted subjects, confusing visual hierarchy.",
+            "heavy_grain": "Excessive film-like grain that overwhelms fine detail, adding rough texture to the entire frame.",
+            "datamosh": "Digital data corruption with smeared blocks and temporal tearing that disrupts recognizability.",
+            "vhs_decay": "Analog tape artifacts like scanlines, wobble, and color bleeding that signal age and mechanical wear.",
+            "low_resolution_retro": "Small, blocky detail with visible pixel structure and soft edges that signal low technical fidelity and early digital or analog capture.",
+            "scanline_texture": "Horizontal banding and line structure that mimic analog displays and degrade image clarity while adding mechanical feel.",
+            "over_sharpened_haloing": "Exaggerated micro-contrast with bright halos around edges and brittle, unnatural contour emphasis that feels digitally forced.",
+            "stuttered_frame_corruption": "Temporal discontinuities, frozen frames, or partial updates that disrupt motion continuity and suggest corrupted playback."
+        },
+        "emotion": {
+            "negative_personal_emotion": "Subject displays expressions of sadness, anger, or distress, communicating clear negative affect.",
+            "atmospheric_distress": "Scenes evoking feelings of depression, creepiness, or horror through mood, setting, and tone.",
+            "nostalgic_unease": "Mixed feeling of childhood memory and subtle dread where familiarity is poisoned by faint threat or loss.",
+            "disorienting_dream_calm": "Calm surface mood with underlying confusion, dissociation, and loss of orientation in time or place.",
+            "depersonalization_detachment": "Emotional distance, numbed expression, and a sense of observing oneself from outside with weakened personal agency."
+        },
+        "distortion": {
+            "melted_objects": "Solid items appearing liquefied or sagging unnaturally, undermining material stability.",
+            "distorted_sense": "Warps in perspective or environmental logic that challenge spatial understanding.",
+            "anatomical_deformity": "Incorrect skeletal structure, extra limbs, or fused digits, producing bodily unease.",
+            "non_euclidean_geometry": "Spatial relationships that contradict physical intuition with impossible angles, folding spaces, or looping corridors.",
+            "recursive_space_repetition": "Spaces or objects nested within themselves or repeated in depth to suggest infinite regress and visual echo.",
+            "facial_feature_displacement": "Eyes, mouth, or other facial elements subtly shifted, duplicated, or misaligned while the rest remains plausible, heightening uncanniness."
+        },
+        "execution_quality": {
+            "unfinished": "Artworks appearing incomplete or missing essential details, leaving construction marks or blocked-out areas visible.",
+            "old_broken_dirty": "Objects appear aged, worn, broken, dirty, or poorly maintained, communicating neglect and decay.",
+            "disgust": "Visually repulsive elements such as gore, decay, or filth that provoke visceral aversion.",
+            "taken_with_dirty_lens": "Smudges, dust, or grime on the lens that reduce clarity or create haze and flare.",
+            "ghosting": "Transparent or faint double images often seen in poorly rendered motion or misaligned compositing.",
+            "aliasing": "Jagged, 'staircase' edges on curved lines or diagonal shapes caused by insufficient sampling.",
+            "analog_decay_texture": "Visual patina of age with scratches, bleed, tracking errors, and surface damage embedded into the frame as constant noise.",
+            "amateur_snapshot_energy": "Casual, poorly framed capture with accidental tilt, awkward cropping, and indifferent timing that feels unplanned.",
+            "kitsch_excess": "Overloaded decorative elements, sentimental clichés, and gaudy styling that feel cheap, tacky, and theatrically overdone."
+        },
+        "lighting_and_exposure": {
+            "underexposed": "Images that are too dark with lost shadow detail and compressed tonal range.",
+            "overexposed": "Images that are too bright with blown-out highlights and erased textures.",
+            "harsh_flash": "Artificial lighting that is harsh and overly bright, creating strong shadows and specular hotspots.",
+            "insufficient_flash": "Lack of adequate artificial light resulting in poor visibility and murky shadows.",
+            "oversaturation": "Excessive color intensity causing loss of detail or burning in bright regions.",
+            "flat_lighting": "Lack of shadows and highlights leading to a loss of depth and dimension with a cardboard-like appearance.",
+            "light_leak": "Unintended streaks of light washing out parts of the image, suggesting film or housing defects.",
+            "patchy_ambient_pools": "Uneven ambient illumination with localized bright zones surrounded by murky darkness that breaks uniform readability.",
+            "oppressive_low_contrast": "Crushed midtones with weak separation between light and dark, producing a heavy, suffocating mood over the whole frame.",
+            "overcast_flat_gloom": "Soft, shadowless illumination that suppresses highlights and deep shadows and creates dull, overcast gloom with tired atmosphere."
+        },
+        "structure_and_perspective": {
+            "scale_inconsistency": "Objects have conflicting or unrealistic relative sizes that confuse spatial cues.",
+            "endless_corridor_depth": "Linear perspective that suggests corridor-like extension into unclear infinity with no clear endpoint or focal termination.",
+            "obstructed_view_cropping": "Key subjects partially cut off, blocked, or hidden at frame edges so important information feels withheld or accidental.",
+            "tilted_snapshot_angle": "Noticeable off-level horizon or skewed framing that introduces subconscious instability and informality."
+        },
+        "context_and_setting": {
+            "liminal_public_space": "Unpopulated public or semi-public environments with functional design but total absence of activity, evoking abandonment or pause.",
+            "empty_childlike_space": "Spaces associated with childhood coded through scale, color, or motifs yet conspicuously devoid of people, hinting at lost time.",
+            "uncanny_domestic_scene": "Domestic interiors presented with rigid order or subtle wrongness that undermines homely familiarity and safety.",
+            "backrooms_infinite_interior": "Monotonous, repeating interior modules implying endless extension, disorientation, and entrapment within anonymous space.",
+            "dream_symbol_fragments": "Floating, disconnected symbolic elements that feel laden with personal meaning but resist clear narrative or explanation."
+        }
+    },
+    "pro_aesthetics": {
+        "realism_and_style": {
+            "photorealism": "Imagery indistinguishable from a high-quality photograph of real life, with convincing materials, lighting, and detail.",
+            "hyperrealism": "Extremely high attention to detail, often exceeding the clarity of standard vision and emphasizing microscopic textures.",
+            "cinematic": "Visuals resembling high-budget film production with dramatic composition, controlled movement, and narrative framing.",
+            "masterpiece": "Work displaying exceptional skill, artistry, and execution across composition, technique, and concept.",
+            "concept_art": "Polished illustrative style used to visualize ideas for movies or games, focused on design clarity and mood.",
+            "stylized_consistency": "A unified artistic style that remains coherent across the entire image in line, color, and form language.",
+            "natural_surface_realism": "Surfaces look lifelike with varied, believable material response and nuanced microstructure.",
+            "ethereal_dreamlike_realism": "Soft, luminous realism with controlled blur, gentle transitions, and cohesive dreamlike atmosphere that still reads as credible.",
+            "painterly_surreal_refinement": "Surreal imagery rendered with refined, painterly technique and consistent visual logic that feels intentional and curated."
+        },
+        "color_quality": {
+            "color_harmony": "Pleasing arrangement of colors based on theory (e.g., complementary, analogous).",
+            "consistent_white_balance": "Unified color temperature across the scene with no mixed tints, reinforcing realism.",
+            "vibrant": "Bright, rich colors that convey energy and life without oversaturation or clipping.",
+            "cinematic_grading": "Professional color adjustment to establish mood and atmospheric tone with clear separation of lights and darks.",
+            "subsurface_scattering": "Realistic simulation of light penetrating translucent surfaces like skin or wax, creating soft internal glow.",
+            "high_dynamic_range": "Broad range of luminosity allowing for detail in both shadows and highlights without crushing or clipping.",
+            "neutral_light_balance": "Natural, neutral lighting without heavy color casts that allows surface colors to read accurately.",
+            "pastel_soft_palette": "Gentle, low-contrast colors with smooth transitions and tender emotional tone suited to delicate scenes.",
+            "moody_monochrome_grading": "Restricted hue range used to emphasize light, shadow, and mood with deliberate tonal design and strong atmosphere."
+        },
+        "emotion": {
+            "expressive": "Subjects convey clear, relatable, or profound emotional states through gesture, gaze, and posture.",
+            "evocative": "Imagery that successfully elicits a strong reaction or mood from the viewer through design choices.",
+            "dynamic_pose": "Body language suggesting movement, action, or energy with intentional rhythm and tension.",
+            "atmospheric_depth": "Environmental mood that immerses the viewer in the scene through layered space and tone.",
+            "bittersweet_nostalgia": "Warm yet slightly mournful emotional tone that recalls memory with both comfort and loss."
+        },
+        "structure_and_perspective": {
+            "golden_ratio": "Composition based on the mathematical ratio 1:1.618 for aesthetic balance and pleasing division of space.",
+            "rule_of_thirds": "Subject placement along grid lines to create visual interest and dynamic tension.",
+            "perfect_perspective": "Accurate vanishing points and spatial depth logic that align with physical reality.",
+            "symmetrical_balance": "Elements arranged evenly to create stability and formality within the frame.",
+            "consistent_scale": "Objects maintain realistic and consistent relative sizes according to distance and context."
+        },
+        "execution_quality": {
+            "intricate_details": "Complex elements rendered with precision and care, rewarding close inspection.",
+            "pristine_well_maintained": "Objects appear clean, intact, well-maintained, and like-new, signaling care and quality.",
+            "polished": "Finished look with no rough edges, artifacts, or noise, suggesting thorough refinement.",
+            "material_fidelity": "Textures that accurately mimic their real-world counterparts (e.g., silk, metal, glass).",
+            "clean_lines": "Smooth, deliberate strokes or edges without aliasing or jitter, indicating control.",
+            "clean_lens_clarity": "Optically clean lens with no smudges or haze, producing transparent, undistorted viewing."
+        },
+        "lighting_and_exposure": {
+            "volumetric_lighting": "Visible light beams or 'god rays' adding atmosphere and depth to the scene.",
+            "global_illumination": "Realistic simulation of indirect light bouncing between surfaces for cohesive illumination.",
+            "rim_lighting": "Backlighting that highlights the edges of a subject to separate it from the background.",
+            "chiaroscuro": "Strong contrast between light and dark to create volume and drama.",
+            "ambient_occlusion": "Soft shadowing in corners and crevices enhancing 3D definition and grounding objects.",
+            "golden_hour": "Warm, soft lighting characteristic of sunrise or sunset that flatters forms and colors."
+        }
+    }
+}
