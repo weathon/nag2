@@ -18,7 +18,7 @@ def softclip(x, tau):
 
 # log = print
 log = lambda *args, **kwargs: None
-def angular_guidance(h_cond, h_uncond, scale, s1=1.0, s2=1.0, tau=0.5):
+def angular_guidance(h_cond, h_uncond, scale, s1=1.0, s2=1.0, tau=0.5, norm=1.0):
     norm_c = h_cond.norm(dim=-1, keepdim=True)
     a = h_cond / (norm_c + 1e-8)
     b = h_uncond / (h_uncond.norm(dim=-1, keepdim=True) + 1e-8)
@@ -29,15 +29,15 @@ def angular_guidance(h_cond, h_uncond, scale, s1=1.0, s2=1.0, tau=0.5):
     # Clamp the turning angles (not theta), matching the paper's threshold((ω-1)γ, τ)
     # phi1 = (scale * s1 * theta).clamp(max=tau * math.pi)
     # phi2 = (scale * s2 * theta).clamp(max=tau * math.pi)
-    phi1 = softclip(scale * s1 * theta, tau * theta)
-    phi2 = softclip(scale * s2 * theta, tau * theta)
+    phi1 = softclip(scale * s1 * theta, tau * 3.14)
+    phi2 = softclip(scale * s2 * theta, tau * 3.14)
 
     sin_t = theta.sin().clamp(min=1e-8)
     result = (torch.sin(theta + phi1) / sin_t) * a - \
              (torch.sin(phi2) / sin_t) * b
 
     result = torch.where(theta < 1e-5, a, result)
-    return result * norm_c * 1.0
+    return result * norm_c * norm
 
 
 
@@ -84,7 +84,7 @@ class NAGFluxTransformerBlock(FluxTransformerBlock):
         ff_output = gate_mlp.unsqueeze(1) * ff_output
         log(hidden_states.shape)
         if self.guidance_type == "angular" and self.nag_scale > 1.0:
-            ff_output = angular_guidance(ff_output[:1], ff_output[1:2], scale=self.nag_scale, tau=self.nag_tau)
+            ff_output = angular_guidance(ff_output[:1], ff_output[1:2], scale=self.nag_scale, tau=self.nag_tau, norm=1.3)
             log(ff_output.shape, "ppp")
             hidden_states = hidden_states[:1]
         log(hidden_states.shape, "LMAO")
@@ -136,7 +136,7 @@ class NAGFluxSingleTransformerBlock(FluxSingleTransformerBlock):
         gate = gate.unsqueeze(1)
         hidden_states = gate * self.proj_out(hidden_states)
         if self.guidance_type == "angular" and self.nag_scale > 1.0 and hidden_states.shape[0] == 2:
-            guided_img = angular_guidance(hidden_states[:1, text_seq_len:], hidden_states[1:2, text_seq_len:], scale=self.nag_scale, tau=self.nag_tau)
+            guided_img = angular_guidance(hidden_states[:1, text_seq_len:], hidden_states[1:2, text_seq_len:], scale=self.nag_scale, tau=self.nag_tau, norm=1.0)
             hidden_states = torch.cat([hidden_states[:, :text_seq_len], guided_img.expand(2, -1, -1)], dim=1)
         hidden_states = residual + hidden_states
         if hidden_states.dtype == torch.float16:

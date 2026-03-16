@@ -29,15 +29,13 @@
             "motion_blur": "Streaking or smearing caused by movement during exposure, weakening structural clarity.",
             "noise": "Grainy textures or electronic interference affecting image purity and reducing smooth tonal transitions.",
             "compression_artifacts": "Blocky distortion or 'mosquito noise' resulting from high image compression, especially around edges and gradients.",
-            "compression_mosquito_noise": "Swarming edge noise around details due to heavy compression that breaks clean boundaries.",
             "double_exposure": "Overlapping exposures that create duplicated or ghosted subjects, confusing visual hierarchy.",
             "heavy_grain": "Excessive film-like grain that overwhelms fine detail, adding rough texture to the entire frame.",
             "datamosh": "Digital data corruption with smeared blocks and temporal tearing that disrupts recognizability.",
             "vhs_decay": "Analog tape artifacts like scanlines, wobble, and color bleeding that signal age and mechanical wear.",
             "low_resolution_retro": "Small, blocky detail with visible pixel structure and soft edges that signal low technical fidelity and early digital or analog capture.",
             "scanline_texture": "Horizontal banding and line structure that mimic analog displays and degrade image clarity while adding mechanical feel.",
-            "over_sharpened_haloing": "Exaggerated micro-contrast with bright halos around edges and brittle, unnatural contour emphasis that feels digitally forced.",
-            "stuttered_frame_corruption": "Temporal discontinuities, frozen frames, or partial updates that disrupt motion continuity and suggest corrupted playback."
+            "over_sharpened_haloing": "Exaggerated micro-contrast with bright halos around edges and brittle, unnatural contour emphasis that feels digitally forced."
         },
         "emotion": {
             "negative_personal_emotion": "Subject displays expressions of sadness, anger, or distress, communicating clear negative affect.",
@@ -108,8 +106,6 @@
             "consistent_white_balance": "Unified color temperature across the scene with no mixed tints, reinforcing realism.",
             "vibrant": "Bright, rich colors that convey energy and life without oversaturation or clipping.",
             "cinematic_grading": "Professional color adjustment to establish mood and atmospheric tone with clear separation of lights and darks.",
-            "subsurface_scattering": "Realistic simulation of light penetrating translucent surfaces like skin or wax, creating soft internal glow.",
-            "high_dynamic_range": "Broad range of luminosity allowing for detail in both shadows and highlights without crushing or clipping.",
             "neutral_light_balance": "Natural, neutral lighting without heavy color casts that allows surface colors to read accurately.",
             "pastel_soft_palette": "Gentle, low-contrast colors with smooth transitions and tender emotional tone suited to delicate scenes.",
             "moody_monochrome_grading": "Restricted hue range used to emphasize light, shadow, and mood with deliberate tonal design and strong atmosphere."
@@ -122,7 +118,6 @@
             "bittersweet_nostalgia": "Warm yet slightly mournful emotional tone that recalls memory with both comfort and loss."
         },
         "structure_and_perspective": {
-            "golden_ratio": "Composition based on the mathematical ratio 1:1.618 for aesthetic balance and pleasing division of space.",
             "rule_of_thirds": "Subject placement along grid lines to create visual interest and dynamic tension.",
             "perfect_perspective": "Accurate vanishing points and spatial depth logic that align with physical reality.",
             "symmetrical_balance": "Elements arranged evenly to create stability and formality within the frame.",
@@ -138,10 +133,8 @@
         },
         "lighting_and_exposure": {
             "volumetric_lighting": "Visible light beams or 'god rays' adding atmosphere and depth to the scene.",
-            "global_illumination": "Realistic simulation of indirect light bouncing between surfaces for cohesive illumination.",
             "rim_lighting": "Backlighting that highlights the edges of a subject to separate it from the background.",
             "chiaroscuro": "Strong contrast between light and dark to create volume and drama.",
-            "ambient_occlusion": "Soft shadowing in corners and crevices enhancing 3D definition and grounding objects.",
             "golden_hour": "Warm, soft lighting characteristic of sunrise or sunset that flatters forms and colors."
         }
     }
