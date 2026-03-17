@@ -145,9 +145,10 @@ class Qwen3VLEmbedder():
         num_frames: int = MAX_FRAMES,
         max_frames: int = MAX_FRAMES,
         default_instruction: str = "Represent the user's input.",
+        device: str = "cpu",
         **kwargs
     ):
-        device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+        # device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
         self.max_length = max_length
         self.min_pixels = min_pixels

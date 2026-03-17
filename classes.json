@@ -5,8 +5,6 @@
             "plastic_toy_look": "Surfaces look like cheap plastic toys with uniform sheen and simplified detail, producing a synthetic and emotionally flat impression.",
             "weirdcore_fragmented_identity": "Disjoint, collage-like imagery with distorted symbolism, misplaced faces, and fragmented identity cues that feel uncanny and alien.",
             "liminal_space_aesthetic": "Empty transitional spaces with ambiguous function, endless repetition, and a suspended, in-between atmosphere that suggests drifting or waiting.",
-            "analog_horror_found_footage": "Low-fidelity analog-style visuals that feel archival, degraded, and observational with implied off-screen threat and slow-building dread.",
-            "Psychedelic art": "Vivid, surreal imagery with intense colors, distorted forms, and dreamlike symbolism that evokes altered states of consciousness and emotional intensity.",
             "outsider_naive_style": "Crude, naive rendering that ignores conventional proportion, perspective, and polish in favor of raw, awkward expression and unfiltered imagery."
         },
         "color_quality": {
@@ -17,8 +15,6 @@
             "color_bleeding": "Colors spilling over the edges of defined objects into adjacent areas, degrading separation and clarity.",
             "chromatic_aberration": "Color fringing along high-contrast edges caused by lens or rendering failure, suggesting cheap optics or digital error.",
             "color_banding": "Visible steps between color shades instead of a smooth gradient, revealing limited tonal precision.",
-            "sodium_vapor_cast": "Strong yellow-orange color cast reminiscent of sodium vapor street lighting that overwhelms neutral tones.",
-            "retro_faded_palette": "Washed-out, aged colors with low saturation, uneven fading, and a nostalgic, timeworn cast that implies archival or decayed media.",
             "toxic_neon_palette": "Hyper-bright, acidic colors with aggressive contrast that feel synthetic, unstable, and overstimulating to the eye.",
             "sickly_color_cast": "Unhealthy overall tint that suggests rot, illness, or contamination and shifts skin and surfaces toward unsettling hues.",
             "monotone_tint_overcast": "Dominant single-color or narrow-band tint that flattens variety and imposes a heavy, somber mood across the frame."
@@ -26,23 +22,12 @@
         "clarity_and_focus": {
             "blurriness": "General lack of sharpness or distinct edges in the image that obscures detail and form.",
             "out_of_focus": "Main subjects are not sharp due to improper focal depth, drawing attention away from intended points of interest.",
-            "motion_blur": "Streaking or smearing caused by movement during exposure, weakening structural clarity.",
             "noise": "Grainy textures or electronic interference affecting image purity and reducing smooth tonal transitions.",
             "compression_artifacts": "Blocky distortion or 'mosquito noise' resulting from high image compression, especially around edges and gradients.",
-            "double_exposure": "Overlapping exposures that create duplicated or ghosted subjects, confusing visual hierarchy.",
-            "heavy_grain": "Excessive film-like grain that overwhelms fine detail, adding rough texture to the entire frame.",
-            "datamosh": "Digital data corruption with smeared blocks and temporal tearing that disrupts recognizability.",
-            "vhs_decay": "Analog tape artifacts like scanlines, wobble, and color bleeding that signal age and mechanical wear.",
-            "low_resolution_retro": "Small, blocky detail with visible pixel structure and soft edges that signal low technical fidelity and early digital or analog capture.",
-            "scanline_texture": "Horizontal banding and line structure that mimic analog displays and degrade image clarity while adding mechanical feel.",
             "over_sharpened_haloing": "Exaggerated micro-contrast with bright halos around edges and brittle, unnatural contour emphasis that feels digitally forced."
         },
         "emotion": {
-            "negative_personal_emotion": "Subject displays expressions of sadness, anger, or distress, communicating clear negative affect.",
-            "atmospheric_distress": "Scenes evoking feelings of depression, creepiness, or horror through mood, setting, and tone.",
-            "nostalgic_unease": "Mixed feeling of childhood memory and subtle dread where familiarity is poisoned by faint threat or loss.",
-            "disorienting_dream_calm": "Calm surface mood with underlying confusion, dissociation, and loss of orientation in time or place.",
-            "depersonalization_detachment": "Emotional distance, numbed expression, and a sense of observing oneself from outside with weakened personal agency."
+            "atmospheric_distress": "Scenes evoking feelings of depression, creepiness, or horror through mood, setting, and tone."
         },
         "distortion": {
             "melted_objects": "Solid items appearing liquefied or sagging unnaturally, undermining material stability.",
@@ -77,7 +62,6 @@
         },
         "structure_and_perspective": {
             "scale_inconsistency": "Objects have conflicting or unrealistic relative sizes that confuse spatial cues.",
-            "endless_corridor_depth": "Linear perspective that suggests corridor-like extension into unclear infinity with no clear endpoint or focal termination.",
             "obstructed_view_cropping": "Key subjects partially cut off, blocked, or hidden at frame edges so important information feels withheld or accidental.",
             "tilted_snapshot_angle": "Noticeable off-level horizon or skewed framing that introduces subconscious instability and informality."
         },
@@ -85,7 +69,6 @@
             "liminal_public_space": "Unpopulated public or semi-public environments with functional design but total absence of activity, evoking abandonment or pause.",
             "empty_childlike_space": "Spaces associated with childhood coded through scale, color, or motifs yet conspicuously devoid of people, hinting at lost time.",
             "uncanny_domestic_scene": "Domestic interiors presented with rigid order or subtle wrongness that undermines homely familiarity and safety.",
-            "backrooms_infinite_interior": "Monotonous, repeating interior modules implying endless extension, disorientation, and entrapment within anonymous space.",
             "dream_symbol_fragments": "Floating, disconnected symbolic elements that feel laden with personal meaning but resist clear narrative or explanation."
         }
     },

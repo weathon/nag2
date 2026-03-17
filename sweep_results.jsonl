@@ -1,0 +1,16 @@
+{"method": "angular", "round": 0, "hps": {"nag_scale": 7.96560443700367, "nag_alpha": 0.2755513759008209, "nag_tau": 0.44343916796455296}, "avg_score": 0.5617740301772801}
+{"method": "angular", "round": 1, "hps": {"nag_scale": 7.276312261534275, "nag_alpha": 0.13767093915505982, "nag_tau": 0.49024894065470237}, "avg_score": 0.5696106938400654}
+{"method": "angular", "round": 2, "hps": {"nag_scale": 7.850257317913177, "nag_alpha": 0.41442572211078155, "nag_tau": 0.15124545307021836}, "avg_score": 0.5905028661393156}
+{"method": "angular", "round": 3, "hps": {"nag_scale": 5.053473441060104, "nag_alpha": 0.2483192096930325, "nag_tau": 0.4707059955394407}, "avg_score": 0.585622102022171}
+{"method": "angular", "round": 4, "hps": {"nag_scale": 6.794786080725981, "nag_alpha": 0.42910464530833203, "nag_tau": 0.2773656795309325}, "avg_score": 0.5870592448145452}
+{"method": "angular", "round": 5, "hps": {"nag_scale": 3.0451484960629918, "nag_alpha": 0.32183391480633394, "nag_tau": 0.12552690244167014}, "avg_score": 0.5967151671648026}
+{"method": "angular", "round": 6, "hps": {"nag_scale": 8.44868054793324, "nag_alpha": 0.35266575964882596, "nag_tau": 0.40323509603414953}, "avg_score": 0.5548067808602796}
+{"method": "angular", "round": 7, "hps": {"nag_scale": 4.190733713168815, "nag_alpha": 0.48827920975796135, "nag_tau": 0.45724844852887914}, "avg_score": 0.5979863239659203}
+{"method": "angular", "round": 8, "hps": {"nag_scale": 8.005451473663857, "nag_alpha": 0.17785548314078703, "nag_tau": 0.28668840149081365}, "avg_score": 0.5874922836970802}
+{"method": "angular", "round": 9, "hps": {"nag_scale": 1.394233892085059, "nag_alpha": 0.16171579682701914, "nag_tau": 0.37321958129698185}, "avg_score": 0.5958980061490127}
+{"method": "angular", "round": 10, "hps": {"nag_scale": 7.702859403170354, "nag_alpha": 0.48700389297368407, "nag_tau": 0.2303301432552608}, "avg_score": 0.5915293750738857}
+{"method": "angular", "round": 11, "hps": {"nag_scale": 4.33413735431382, "nag_alpha": 0.2878223245103232, "nag_tau": 0.1757885436337143}, "avg_score": 0.5987013870417469}
+{"method": "angular", "round": 12, "hps": {"nag_scale": 2.169293548019245, "nag_alpha": 0.2902819704903735, "nag_tau": 0.19076373962035365}, "avg_score": 0.596857976732832}
+{"method": "angular", "round": 13, "hps": {"nag_scale": 7.028325952142593, "nag_alpha": 0.2748607675489323, "nag_tau": 0.433071278423135}, "avg_score": 0.5739707407927273}
+{"method": "angular", "round": 14, "hps": {"nag_scale": 7.302385918020242, "nag_alpha": 0.22494665655281643, "nag_tau": 0.43290392055808047}, "avg_score": 0.5721384785091034}
+{"method": "angular", "round": 15, "hps": {"nag_scale": 8.242879217471216, "nag_alpha": 0.25499135161206976, "nag_tau": 0.21533124157209765}, "avg_score": 0.5883424179722564}
